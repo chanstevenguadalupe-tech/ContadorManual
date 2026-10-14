@@ -13,31 +13,44 @@
                HorizontalOptions="Fill"
                VerticalOptions="Fill"
                FontSize="Medium"/>
-
         <Border
             Stroke="Gray"
             StrokeThickness="2">
-            <Label Text="5"
-        Padding="0,24"
-        HorizontalOptions="Center"
-        VerticalOptions="Center"
-        FontSize="Large"
-        FontAttributes="Bold"
-                   x:Name="ConteoLabel"/>
+            <Label 
+                Text="{Binding Path=Conteo}"
+              Padding="0,24"
+              HorizontalOptions="Center"
+              VerticalOptions="Center"
+              FontAttributes="Bold"
+              FontSize="Large"/>
+
         </Border>
-        
+        <HorizontalStackLayout
+            Spacing="8">
+            <Label
+                Text="Incrementar conteo por:"
+                VerticalOptions="Center"/>
+            <Entry
+                Text="{Binding Source={x:Reference IncrementoStepper}, Path=Value}"
+                IsReadOnly="True"/>
+            <Stepper
+                Minimum="1"
+                Maximum="20"
+                Increment="1"
+                Value="{Binding Path=Incremento}"
+                x:Name="IncrementoStepper"/>
+        </HorizontalStackLayout>
         <StackLayout
-            Orientation="Horizontal"
             HorizontalOptions="Center"
             Spacing="24"
             Margin="0,24,0,0"
-            >
+            Orientation="Horizontal">
             <Button Text="Contar"
                     FontSize="Medium"
-                    Clicked="OnContarButtonClicked"/>
+                    Clicked="OnContarButtonClicker"/>
             <Button Text="Reiniciar"
                     FontSize="Medium"
-                    Clicked="OnReiniciarButtonClicked"/> 
+                    Clicked="OnReiniciarButtonClicker"/>
         </StackLayout>
        
     </StackLayout>

@@ -1,25 +1,60 @@
-﻿
+﻿using System.Collections.Specialized;
+using System.ComponentModel;
 
-namespace contadormanualmaui.Models
+namespace contadormanual.Maui.Models
 {
-    public class Contador
+    public class Contador : INotifyPropertyChanged
     {
-        public int _conteo;
-        public int Conteo => _conteo;
+        private int _conteo;
+        private int _incremento;
 
-        public Contador()
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public int Conteo
+        {
+            get => _conteo;
+            set
             {
-            _conteo = 0;
+                if (_conteo != value)
+                {
+                    _conteo = value;
+                    OnPropertyChanged(nameof(Conteo));
+                }
             }
+        }
+
+        public int Incremento
+        {
+            get => _incremento;
+            set
+            {
+                if (_incremento != value)
+                {
+                    _incremento = value;
+                    OnPropertyChanged(nameof(Incremento));
+                }
+            }
+        }
+        public Contador()
+        {
+            Conteo = 0;
+            _incremento = 1;
+        }
         public void Contar()
         {
-            _conteo ++;
+            Conteo = Conteo + _incremento;
         }
-        public void Reiniciar() 
+
+        public void Reiniciar()
         {
-            _conteo = 0;
+            Conteo = 0;
         }
-
-
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 }

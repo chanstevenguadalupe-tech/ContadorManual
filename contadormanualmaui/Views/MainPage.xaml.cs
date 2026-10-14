@@ -1,4 +1,5 @@
-using contadormanualmaui.Models;
+using contadormanual.Maui.Models;
+
 
 namespace contadormanualmaui.Views;
 
@@ -6,23 +7,21 @@ public partial class MainPage : ContentPage
 {
     private Contador _contador;
 
-	public MainPage()
-	{
-		InitializeComponent();
+    public MainPage()
+    {
+        InitializeComponent();
         _contador = new Contador();
-        ConteoLabel.Text = _contador.Conteo.ToString();
+        BindingContext = _contador;
     }
 
-    private void OnContarButtonClicked(object sender, EventArgs e)
+    private void OnContarButtonClicker(object sender, EventArgs e)
     {
         _contador.Contar();
-        ConteoLabel.Text = _contador.Conteo.ToString();
     }
-    
 
-    private void OnReiniciarButtonClicked(object sender, EventArgs e)
+    private void OnReiniciarButtonClicker(object sender, EventArgs e)
     {
         _contador.Reiniciar();
-        ConteoLabel.Text = _contador.Conteo.ToString();
     }
+
 }
